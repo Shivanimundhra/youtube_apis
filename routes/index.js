@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyparser = require('body-parser');
 const admin = require("firebase-admin")
-const serviceAccount = require("./apis-5f94e-firebase-adminsdk-k6xl1-7f148f0389.json")
+const serviceAccount = require("apis-5f94e-firebase-adminsdk-k6xl1-ba6b941195.json")
 
 
 admin.initializeApp({
@@ -15,7 +15,12 @@ app.use(bodyparser.json());
 
 app.set('view engine', 'ejs');
 
-app.post('/Signup',async (req,res)=>{
+router.get('/login', (req, res) => {
+  res.render('login'); // Renders login.ejs
+});
+
+
+app.post('/signup',async (req,res)=>{
   const { email, password,name } = req.body;
   try{
     const userrecord = await admin.auth().createUser({
